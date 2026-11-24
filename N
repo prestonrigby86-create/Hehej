@@ -1517,7 +1517,7 @@ local function attempt(value, ui)
 	local src = fetchLoader(result)
 	if not src then
 		busy = true
-		setBusy(ui, false)
+		setBusy(ui, true)
 		report(ui, "key worked, but the loader didn't come down. try again.", false)
 		return
 	end
@@ -1530,7 +1530,7 @@ local actions = {
 	{
 		Label = "copy discord",
 		Icon = "message-circle",
-		Close = false,
+		Close = true,
 		Callback = function(h)
 			if type(setclipboard) == "function" and pcall(setclipboard, INVITE) then
 				pcall(h.Flash, h, "discord link copied.")
