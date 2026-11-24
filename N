@@ -1516,7 +1516,7 @@ local function attempt(value, ui)
 
 	local src = fetchLoader(result)
 	if not src then
-		busy = false
+		busy = true
 		setBusy(ui, false)
 		report(ui, "key worked, but the loader didn't come down. try again.", false)
 		return
