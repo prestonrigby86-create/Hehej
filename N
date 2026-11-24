@@ -1,0 +1,107 @@
+-- LIGHTNING HUB V10 - MINIMAL + COPY NOTIFICATION
+local CoreGui = game:GetService("CoreGui")
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "LightningHub"
+ScreenGui.Parent = CoreGui
+
+local Main = Instance.new("Frame")
+Main.Size = UDim2.new(0, 240, 0, 360)
+Main.Position = UDim2.new(0.5, -120, 0.5, -180)
+Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Main.BorderSizePixel = 2
+Main.BorderColor3 = Color3.fromRGB(255, 215, 0)
+Main.Active = true
+Main.Draggable = true
+Main.Parent = ScreenGui
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Title.TextColor3 = Color3.fromRGB(255, 215, 0)
+Title.Text = "⚡️ LIGHTNING HUB ⚡️"
+Title.TextSize = 14
+Title.Font = Enum.Font.Code
+Title.Parent = Main
+
+local Scroll = Instance.new("ScrollingFrame")
+Scroll.Size = UDim2.new(1, -10, 1, -75)
+Scroll.Position = UDim2.new(0, 5, 0, 70)
+Scroll.BackgroundTransparency = 1
+Scroll.CanvasSize = UDim2.new(0, 0, 0, 450)
+Scroll.ScrollBarThickness = 4
+Scroll.Parent = Main
+
+local UIList = Instance.new("UIListLayout")
+UIList.Padding = UDim.new(0, 5)
+UIList.Parent = Scroll
+
+local HeaderLabel = Instance.new("TextLabel")
+HeaderLabel.Size = UDim2.new(1, -5, 0, 30)
+HeaderLabel.Position = UDim2.new(0, 2, 0, 35)
+HeaderLabel.BackgroundTransparency = 1
+HeaderLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+HeaderLabel.Text = "These are all my scripts, you can copy these script links, open them on Google, and use the scripts."
+HeaderLabel.TextSize = 10
+HeaderLabel.Font = Enum.Font.Code
+HeaderLabel.TextWrapped = true
+HeaderLabel.Parent = Main
+
+local Notif = Instance.new("TextLabel")
+Notif.Size = UDim2.new(0, 210, 0, 30)
+Notif.Position = UDim2.new(1, -220, 1, -40)
+Notif.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Notif.TextColor3 = Color3.fromRGB(255, 215, 0)
+Notif.Text = "Link Copied!"
+Notif.TextSize = 12
+Notif.Font = Enum.Font.Code
+Notif.Visible = false
+Notif.Parent = ScreenGui
+
+local scripts = {
+    {Name = "GlobalChatV2", Link = "https://scriptblox.com/script/Universal-Script-Universal-Global-Chat-V2-227164"},
+    {Name = "UniversalEspGui", Link = "https://scriptblox.com/script/Universal-Script-Universal-ESP-gui-v4-227082"},
+    {Name = "UniversalAdminScript", Link = "https://scriptblox.com/script/Universal-Script-Universal-Admin-Script-V3-(No-key-All-Commands)-227208"},
+    {Name = "UniversalFlyGuiV4", Link = "https://scriptblox.com/script/Universal-Script-Universal-Fly-Gui-V4-226803"},
+    {Name = "LightningHub[noclip,speed...]", Link = "https://scriptblox.com/script/Universal-Script-LightningHub-137203"},
+    {Name = "GeminiAI", Link = "https://scriptblox.com/script/Universal-Script-Gemini-AI-224292"},
+    {Name = "UniversalAudioPlayerFE", Link = "https://scriptblox.com/script/Universal-Script-Audio-player-FE-226601"},
+    {Name = "InteractiveGame", Link = "https://scriptblox.com/script/Universal-Script-Office-Shift:-Interactive-Experience-224851"},
+    {Name = "ScriptFinder", Link = "https://scriptblox.com/script/Universal-Script-Script-Finder-No-Key-225150"},
+    {Name = "c00lkiddGuiV1", Link = "https://scriptblox.com/script/Universal-Script-c00lkidd-gui-v1-226962"}
+}
+
+for i, data in ipairs(scripts) do
+    local ItemContainer = Instance.new("Frame")
+    ItemContainer.Size = UDim2.new(1, -5, 0, 35)
+    ItemContainer.BackgroundTransparency = 1
+    ItemContainer.Parent = Scroll
+
+    local TitleLabel = Instance.new("TextLabel")
+    TitleLabel.Size = UDim2.new(1, -75, 1, 0)
+    TitleLabel.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TitleLabel.Text = " " .. data.Name
+    TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    TitleLabel.TextSize = 11
+    TitleLabel.Font = Enum.Font.Code
+    TitleLabel.Parent = ItemContainer
+
+    local CopyButton = Instance.new("TextButton")
+    CopyButton.Size = UDim2.new(0, 70, 1, 0)
+    CopyButton.Position = UDim2.new(1, -70, 0, 0)
+    CopyButton.BackgroundColor3 = Color3.fromRGB(255, 215, 0)
+    CopyButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+    CopyButton.Text = "Copy"
+    CopyButton.TextSize = 11
+    CopyButton.Font = Enum.Font.Code
+    CopyButton.Parent = ItemContainer
+
+    CopyButton.MouseButton1Click:Connect(function()
+        pcall(function()
+            setclipboard(data.Link)
+        end)
+        Notif.Visible = true
+        task.wait(2)
+        Notif.Visible = false
+    end)
+end
